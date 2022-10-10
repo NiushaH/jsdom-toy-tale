@@ -1,3 +1,6 @@
+document.addEventListener("click", (event)=>{ console.log(" 👀👀👀 :: You Just Clicked on == ", event.target) } )
+
+
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,3 +16,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function fetchToys() {
+  fetch('http://localhost:3000/toys')
+  .then(resp => resp.json())
+  // .then(json => console.log(json))
+  .then(json => renderToys(json))
+}
+
+function renderToys(toys) {
+  const main = document.getElementById('toy-collection');
+  toys.forEach(toy => {
+    const div = document.createElement('div')
+    div.innerHTML = toy.image, toy.name, toy.likes
+    main.appendChild(div)
+  })
+}
